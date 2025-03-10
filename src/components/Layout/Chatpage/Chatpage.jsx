@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";
 import { CaretUpOutlined, FireFilled } from "@ant-design/icons";
-import './Chatpage.css'
+import './Chatpage.css';
 
 const Chatpage = () => {
   const { conversationId } = useParams();
   const location = useLocation();
+  const navigate = useNavigate(); // 👉 THÊM useNavigate
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [check, setCheck] = useState(false);
   const [hasSentFirstQuestion, setHasSentFirstQuestion] = useState(false);
+
   const chatRef = useRef(null);
   const typingRef = useRef("");
 
@@ -20,7 +23,7 @@ const Chatpage = () => {
       conversationId,
       firstQuestion: location.state?.firstQuestion,
     });
-  
+
     if (!hasSentFirstQuestion && location.state?.firstQuestion) {
       console.log("Sending FIRST question:", location.state.firstQuestion);
       sendMessage(location.state.firstQuestion);
@@ -43,14 +46,32 @@ const Chatpage = () => {
           },
         }
       );
+
       const data = await response.json();
+      console.log("Fetched message list:", data);
+
+      // 👉 Kiểm tra nếu không có dữ liệu hoặc mảng rỗng thì quay về HOME
+      if (!data?.data || data.data.length === 0) {
+        console.warn("Không có dữ liệu, quay lại homepage...");
+        navigate("/"); // 👉 Điều hướng về trang chủ
+        return;
+      }
+
       const groupedMessages = [];
 
       for (let i = 0; i < data.data.length; i += 2) {
         if (data.data[i] && data.data[i + 1]) {
           groupedMessages.unshift(
-            { content: data.data[i + 1].content, role: "user", create_at: Date.now() },
-            { content: data.data[i].content, role: "bot", create_at: Date.now() }
+            {
+              content: data.data[i + 1].content,
+              role: "user",
+              create_at: Date.now(),
+            },
+            {
+              content: data.data[i].content,
+              role: "bot",
+              create_at: Date.now(),
+            }
           );
         }
       }
@@ -58,6 +79,7 @@ const Chatpage = () => {
       setMessages(groupedMessages);
     } catch (error) {
       console.error("Lỗi khi lấy danh sách tin nhắn:", error);
+      navigate("/"); // 👉 Có lỗi cũng điều hướng về HOME luôn
     }
   };
 
@@ -80,7 +102,10 @@ const Chatpage = () => {
 
   const fetchBotResponse = async (userInput) => {
     try {
-      setMessages((prev) => [...prev, { content: "⏳ Đang xử lý...", role: "bot", create_at: Date.now() }]);
+      setMessages((prev) => [
+        ...prev,
+        { content: "⏳ Đang xử lý...", role: "bot", create_at: Date.now() },
+      ]);
 
       const response = await fetch(
         `https://api.coze.com/v3/chat?conversation_id=${conversationId}`,
@@ -180,7 +205,10 @@ const Chatpage = () => {
                   </div>
                 ) : (
                   <ReactMarkdown>
-                    {msg.content.replace(/\\n/g, "\n").replace(/\n{2,}/g, "\n\n").trim()}
+                    {msg.content
+                      .replace(/\\n/g, "\n")
+                      .replace(/\n{2,}/g, "\n\n")
+                      .trim()}
                   </ReactMarkdown>
                 )}
               </div>
@@ -193,7 +221,7 @@ const Chatpage = () => {
         <div ref={chatRef} />
       </div>
 
-      <div className="input-group d-flex align-items-center ">
+      <div className="input-group d-flex align-items-center">
         <input
           type="text"
           className="form-control main-input"
@@ -202,7 +230,11 @@ const Chatpage = () => {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
         <button className="btn-answer" onClick={() => sendMessage()}>
-          {check ? <FireFilled style={{ color: "white" }} /> : <CaretUpOutlined style={{ color: "white" }} />}
+          {check ? (
+            <FireFilled style={{ color: "white" }} />
+          ) : (
+            <CaretUpOutlined style={{ color: "white" }} />
+          )}
         </button>
       </div>
     </div>
