@@ -3,7 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";
 import { CaretUpOutlined, FireFilled } from "@ant-design/icons";
-import './ChatPage.css'
+import './Chatpage.css'
 
 const Chatpage = () => {
   const { conversationId } = useParams();
