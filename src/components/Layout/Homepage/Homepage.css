@@ -62,11 +62,11 @@
     transform: .2s linear;
 }
 .btn-answer {
-  width: 2rem;
-  height: 2rem;
-  padding: 1rem;
+  width: 2rem !important;
+  height: 2rem !important;
+  padding: 1rem !important;
   border-radius: 50% !important;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0) !important;
   transition: 0.2s linear;
   border: none;
   font-size: 1rem;

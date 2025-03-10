@@ -1,0 +1,150 @@
+.input-group {
+    border: 0.01rem solid grey;
+    border-radius: 1rem;
+    overflow: hidden;
+    justify-content: space-between;
+    padding: 0 1rem 0 0.2rem;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.16);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.16);
+    transform: .2s linear;
+  }
+  .fullMessage {
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .contain-content {
+    position: relative;
+  }
+  
+  .contain-content::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30rem;
+    height: 30rem;
+    background: url("../../../assets/Photo/ChatGPT-Logo.png") center/cover no-repeat;
+  
+    opacity: 0.03; /* Điều chỉnh độ mờ */
+    z-index: -1;
+  }
+  .contain-content::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+  .contain-content::-webkit-scrollbar-thumb {
+    width: 0.3rem;
+    background-color: rgba(128, 128, 128, 0.318);
+    border-radius: 1rem;
+  }
+  .input-group {
+     padding: 1rem 2rem 2rem 0.2rem;
+    width: 100%;
+  }
+  .input-group input {
+    flex: none !important;
+    width: 80% !important;
+    border: none;
+    outline: none;
+    background: white !important;
+  }
+  .input-group input:focus  {
+    box-shadow: none;
+    outline: none;
+    border: none;
+  }
+  .input-group:focus-within {
+      box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.26);
+      -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.26);
+      -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.26);
+      border: 0.01rem solid black;
+      transform: .2s linear;
+  }
+  .btn-answer {
+    width: 2rem;
+    height: 2rem;
+    padding: 1rem;
+    border-radius: 50% !important;
+    background-color: rgb(0, 0, 0);
+    transition: 0.2s linear;
+    border: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-answer:hover {
+    background-color: rgb(50, 50, 50);
+    transition: 0.2s linear;
+  }
+  .alert-user {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+  .alert-user .detail {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .alert-user .detail .detail-content {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    background-color: #ececec;
+  }
+  .alert-user .detail .time-created {
+    margin-top: 0.2rem;
+    width: 100%;
+    font-size: 0.6rem;
+    opacity: 0;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+    transition: 0.2s linear;
+  }
+  .detail-content p {
+  margin: 0 !important;
+  }
+  .alert-user .detail .detail-content:hover ~ .time-created {
+    cursor: pointer;
+    opacity: 1;
+    transition: 0.2s linear;
+  }
+  .alert-assisstant .time-created {
+    margin-top: 0.5rem;
+    font-size: 0.6rem;
+  }
+  .typing-animation {
+    display: inline-flex;
+    gap: 5px;
+  }
+  
+  .typing-animation span {
+    width: 5px;
+    height: 5px;
+    background: #333;
+    border-radius: 50%;
+    animation: typingBlink 1.5s infinite;
+  }
+  
+  .typing-animation span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .typing-animation span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes typingBlink {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
