@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CaretUpOutlined, FireFilled } from "@ant-design/icons";
 import ImageLogo from '../../../assets/Photo/ChatGPT-Logo.png'
-const HomePage = () => {
+const Homepage = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -75,4 +75,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Homepage;

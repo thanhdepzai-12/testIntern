@@ -1,14 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import HomePage from './components/Layout/HomePage/HomePage';
-import ChatPage from './components/Layout/ChatPage/ChatPage';
+import Homepage from './components/Layout/Homepage/Homepage';
+import Chatpage from './components/Layout/Chatpage/Chatpage';
 
 
 
 const App = () => (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/chat/:conversationId" element={<ChatPage />} />
+      <Route path="/" element={<Homepage />} />
+      <Route path="/chat/:conversationId" element={<Chatpage />} />
     </Routes>
 );
 

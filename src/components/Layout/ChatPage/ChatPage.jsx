@@ -3,9 +3,9 @@ import { useParams, useLocation } from "react-router-dom";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";
 import { CaretUpOutlined, FireFilled } from "@ant-design/icons";
-import '../ChatPage/ChatPage.css'
+import './ChatPage.css'
 
-const ChatPage = () => {
+const Chatpage = () => {
   const { conversationId } = useParams();
   const location = useLocation();
   const [messages, setMessages] = useState([]);
@@ -209,4 +209,4 @@ const ChatPage = () => {
   );
 };
 
-export default ChatPage;
+export default Chatpage;
